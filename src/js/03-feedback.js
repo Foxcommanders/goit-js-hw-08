@@ -7,12 +7,12 @@ const refs = {
 const inputEmail = refs.form.elements.email;
 const inputMessage = refs.form.elements.message;
 
-let data = JSON.parse(localStorage.getItem('.feedback-form')) || {};
+let data = JSON.parse(localStorage.getItem('feedback-form-state')) || {};
 
 refs.form.addEventListener('input', throttle(formInput), 500);
 function formInput(e) {
   data[e.target.name] = e.target.value;
-  localStorage.setItem('.feedback-form', JSON.stringify(data));
+  localStorage.setItem('feedback-form-state', JSON.stringify(data));
 }
 
 function onLoad() {
@@ -25,7 +25,7 @@ refs.form.addEventListener('submit', formSubmit);
 function formSubmit(e) {
   e.preventDefault();
   console.log(data);
-  localStorage.removeItem('.feedback-form');
+  localStorage.removeItem('feedback-form-state');
   e.target.reset();
   data = {};
 }
